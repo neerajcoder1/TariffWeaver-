@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TariffWeaver | Multi-Agent AI Cost Optimization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TariffWeaver</h1>
+            <p class="tagline">Intelligent Supply Chain Redesign via Multi-Agent Coordination</p>
+        </header>
+
+        <section class="controls">
+            <input type="text" id="api-key" placeholder="Enter NewsAPI Key..." value="" />
+            <button class="btn-primary" id="fetch-news">
+                <i data-lucide="refresh-cw"></i> Scan Global News
+            </button>
+            <button class="btn-secondary" id="activate-demo">
+                <i data-lucide="database"></i> Load Mock Demo
+            </button>
+            <button class="btn-secondary" id="run-analysis" disabled>
+                <i data-lucide="play"></i> Run Multi-Agent Analysis
+            </button>
+        </section>
+
+        <section id="news-banner" class="glass-card">
+            <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.25rem;">
+                    <span class="news-badge">Breaking</span>
+                    <span id="headline-text" style="font-weight: 500;">No news scanned yet. Click 'Scan Global News' to
+                        begin.</span>
+                </div>
+                <div class="realism-label">
+                    <i data-lucide="info" size="12"></i> Tariff impact simulated based on detected trade event
+                </div>
+                <div id="fallback-alert" class="fallback-notice">
+                    <i data-lucide="alert-triangle"></i> Fallback demo mode activated
+                </div>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <!-- BOM View -->
+            <section class="glass-card">
+                <div class="section-title">
+                    <i data-lucide="box"></i> Current Product Bill of Materials (BOM): Speaker
+                </div>
+                <div id="bom-view">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Unit Cost</th>
+                                <th>Source</th>
+                                <th>Current Duty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bom-body">
+                            <!-- Items will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Agent Logs -->
+            <section class="glass-card">
+                <div class="section-title">
+                    <i data-lucide="cpu"></i> Multi-Agent Live Logs
+                </div>
+                <div id="agent-logs">
+                    <div class="log-entry">Waiting for analysis sequence to trigger...</div>
+                </div>
+                <!-- Agent Summary Summary -->
+                <div id="agent-summary-box" class="agent-summary" style="display: none;">
+                    <div class="summary-item">
+                        <div class="sum-label">Affected</div>
+                        <div class="sum-val" id="sum-affected">-</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="sum-label">Options</div>
+                        <div class="sum-val" id="sum-options">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="sum-label">Verified</div>
+                        <div class="sum-val" id="sum-verified">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="sum-label">Result</div>
+                        <div class="sum-val" id="sum-result">-</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Strategy & Output -->
+        <section id="results-card" class="glass-card" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                <div class="section-title" style="margin-bottom: 0;">
+                    <i data-lucide="award"></i> Optimized Redesign Playbook
+                </div>
+                <div class="confidence-badge"
+                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">
+                    <i data-lucide="check-circle-2"></i> Ready for executive approval → Procurement workflow trigger
+                </div>
+                <div class="confidence-badge">
+                    <i data-lucide="shield-check"></i> Confidence Score: 92%
+                </div>
+            </div>
+
+            <div id="recommendation-box"
+                style="margin-bottom: 1.5rem; border-left: 4px solid var(--success); padding-left: 1.5rem;">
+                <h2 id="strategy-title" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: white;">Strategic
+                    Resourcing Shift</h2>
+                <p id="strategy-desc" style="color: var(--text-dim);"></p>
+            </div>
+
+            <!-- Multi-Option View -->
+            <div class="section-title" style="font-size: 0.75rem;"><i data-lucide="layers"></i> Reasoning Across
+                Generated Strategies</div>
+            <div id="options-display" class="options-stack">
+                <!-- Mini cards for options -->
+            </div>
+
+            <div class="cost-arrow">
+                <span id="old-val-mini" style="color: #f43f5e;">$0</span>
+                <i data-lucide="arrow-right"></i>
+                <span id="new-val-mini" style="color: #10b981;">$0</span>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-stat baseline">
+                    <div class="stat-label">Baseline Cost (Annual)</div>
+                    <div class="stat-value" id="old-cost">$0</div>
+                </div>
+                <div class="result-stat optimized">
+                    <div class="stat-label">Optimized Cost (Annual)</div>
+                    <div class="stat-value" id="new-cost">$0</div>
+                </div>
+                <div class="result-stat savings-highlight">
+                    <div class="stat-label">Projected Net Savings</div>
+                    <div class="stat-value savings" id="net-savings">$0</div>
+                </div>
+            </div>
+
+            <div id="playbook-explanation"
+                style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-dim); line-height: 1.6;">
+                <!-- Explanation text -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Developed for AI Procurement Hackathon 2026</p>
+            <a href="https://github.com/neerajcoder1" target="_blank" class="github-link">
+                <i data-lucide="github"></i> neerajcoder1
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="agents.js"></script>
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
