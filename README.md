@@ -57,4 +57,4 @@ To run this project locally for testing or judge review:
 4.  **Run Analysis**: Click **Run Multi-Agent Analysis** to see the agents in action.
 
 ---
-**Built by [VisionX] | March 2026**
+**Built by [neerajcoder1](https://github.com/neerajcoder1) | March 2026**

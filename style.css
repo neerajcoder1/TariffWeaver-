@@ -55,6 +55,18 @@ h1 {
   font-size: 1.1rem;
 }
 
+.github-header-link {
+  color: var(--text-dim);
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.github-header-link:hover {
+  color: var(--accent);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
 /* Glass Card */
 .glass-card {
   background: var(--surface);
