@@ -56,19 +56,19 @@
         </section>
 
         <div class="dashboard-grid">
-            <!-- BOM View -->
+            <!-- Left: BOM View -->
             <section class="glass-card">
                 <div class="section-title">
-                    <i data-lucide="box"></i> Current Product Bill of Materials (BOM): Speaker
+                    <i data-lucide="box"></i> BILL OF MATERIALS
                 </div>
-                <div id="bom-view">
+                <div id="bom-view" style="flex: 1; overflow-y: auto;">
                     <table>
                         <thead>
                             <tr>
                                 <th>Component</th>
-                                <th>Unit Cost</th>
+                                <th>Cost</th>
                                 <th>Source</th>
-                                <th>Current Duty</th>
+                                <th>Duty</th>
                             </tr>
                         </thead>
                         <tbody id="bom-body">
@@ -78,99 +78,93 @@
                 </div>
             </section>
 
-            <!-- Agent Logs -->
-            <section class="glass-card">
-                <div class="section-title">
-                    <i data-lucide="cpu"></i> Multi-Agent Live Logs
-                </div>
-                <div id="agent-logs">
-                    <div class="log-entry">Waiting for analysis sequence to trigger...</div>
-                </div>
+            <!-- Middle: Agent Hub -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; min-height: 0;">
+                <section class="glass-card" style="flex: 1; min-height: 0;">
+                    <div class="section-title">
+                        <i data-lucide="cpu"></i> MULTI-AGENT HUB
+                    </div>
+                    <div id="agent-logs">
+                        <div class="log-entry">System ready. Waiting for news scan...</div>
+                    </div>
+                </section>
+                
                 <!-- Agent Summary Summary -->
-                <div id="agent-summary-box" class="agent-summary" style="display: none;">
-                    <div class="summary-item">
-                        <div class="sum-label">Affected</div>
-                        <div class="sum-val" id="sum-affected">-</div>
+                <section class="glass-card" id="agent-summary-box" style="display: none;">
+                    <div class="agent-summary">
+                        <div class="summary-item">
+                            <div class="sum-label">Affected</div>
+                            <div class="sum-val" id="sum-affected">-</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="sum-label">Options</div>
+                            <div class="sum-val" id="sum-options">0</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="sum-label">Verified</div>
+                            <div class="sum-val" id="sum-verified">0</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="sum-label">Result</div>
+                            <div class="sum-val" id="sum-result">-</div>
+                        </div>
                     </div>
-                    <div class="summary-item">
-                        <div class="sum-label">Options</div>
-                        <div class="sum-val" id="sum-options">0</div>
+                </section>
+            </div>
+
+            <!-- Right: Insights & Results -->
+            <section id="results-card" class="glass-card">
+                <div id="results-idle-state" style="text-align: center; margin: auto; color: var(--text-dim);">
+                    <i data-lucide="brain-circuit" size="48" style="margin-bottom: 1rem; opacity: 0.3;"></i>
+                    <p>Insights will appear here after analysis</p>
+                </div>
+                
+                <div id="results-active-content" style="display: none; height: 100%; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div class="section-title" style="margin-bottom: 0;">
+                            <i data-lucide="award"></i> OPTIMIZED PLAYBOOK
+                        </div>
                     </div>
-                    <div class="summary-item">
-                        <div class="sum-label">Verified</div>
-                        <div class="sum-val" id="sum-verified">0</div>
+
+                    <div id="recommendation-box" style="margin-bottom: 1rem; border-left: 3px solid var(--success); padding-left: 1rem;">
+                        <h2 id="strategy-title" style="font-size: 1.1rem; margin-bottom: 0.25rem; color: white;">Strategic Shift</h2>
+                        <p id="strategy-desc" style="color: var(--text-dim); font-size: 0.8rem;"></p>
                     </div>
-                    <div class="summary-item">
-                        <div class="sum-label">Result</div>
-                        <div class="sum-val" id="sum-result">-</div>
+
+                    <div class="results-grid" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
+                        <div class="result-stat baseline" style="padding: 0.5rem;">
+                            <div class="stat-label">Baseline</div>
+                            <div class="stat-value" id="old-cost" style="font-size: 1rem;">$0</div>
+                        </div>
+                        <div class="result-stat optimized" style="padding: 0.5rem;">
+                            <div class="stat-label">Optimized</div>
+                            <div class="stat-value" id="new-cost" style="font-size: 1rem;">$0</div>
+                        </div>
+                    </div>
+
+                    <div class="result-stat savings-highlight" style="padding: 0.75rem; margin-bottom: 1rem;">
+                        <div class="stat-label">Projected Net Savings</div>
+                        <div class="stat-value savings" id="net-savings" style="font-size: 1.5rem;">$0</div>
+                    </div>
+
+                    <div id="options-display" class="options-stack" style="grid-template-columns: 1fr; gap: 0.5rem; flex: 1; overflow-y: auto;">
+                        <!-- Mini cards for options -->
+                    </div>
+
+                    <div id="playbook-explanation" style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; border-top: 1px solid var(--glass-border); padding-top: 0.75rem;">
+                        <!-- Explanation text -->
                     </div>
                 </div>
             </section>
         </div>
-
-        <!-- Strategy & Output -->
-        <section id="results-card" class="glass-card" style="display: none;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                <div class="section-title" style="margin-bottom: 0;">
-                    <i data-lucide="award"></i> Optimized Redesign Playbook
-                </div>
-                <div class="confidence-badge"
-                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">
-                    <i data-lucide="check-circle-2"></i> Ready for executive approval → Procurement workflow trigger
-                </div>
-                <div class="confidence-badge">
-                    <i data-lucide="shield-check"></i> Confidence Score: 92%
-                </div>
-            </div>
-
-            <div id="recommendation-box"
-                style="margin-bottom: 1.5rem; border-left: 4px solid var(--success); padding-left: 1.5rem;">
-                <h2 id="strategy-title" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: white;">Strategic
-                    Resourcing Shift</h2>
-                <p id="strategy-desc" style="color: var(--text-dim);"></p>
-            </div>
-
-            <!-- Multi-Option View -->
-            <div class="section-title" style="font-size: 0.75rem;"><i data-lucide="layers"></i> Reasoning Across
-                Generated Strategies</div>
-            <div id="options-display" class="options-stack">
-                <!-- Mini cards for options -->
-            </div>
-
-            <div class="cost-arrow">
-                <span id="old-val-mini" style="color: #f43f5e;">$0</span>
-                <i data-lucide="arrow-right"></i>
-                <span id="new-val-mini" style="color: #10b981;">$0</span>
-            </div>
-
-            <div class="results-grid">
-                <div class="result-stat baseline">
-                    <div class="stat-label">Baseline Cost (Annual)</div>
-                    <div class="stat-value" id="old-cost">$0</div>
-                </div>
-                <div class="result-stat optimized">
-                    <div class="stat-label">Optimized Cost (Annual)</div>
-                    <div class="stat-value" id="new-cost">$0</div>
-                </div>
-                <div class="result-stat savings-highlight">
-                    <div class="stat-label">Projected Net Savings</div>
-                    <div class="stat-value savings" id="net-savings">$0</div>
-                </div>
-            </div>
-
-            <div id="playbook-explanation"
-                style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-dim); line-height: 1.6;">
-                <!-- Explanation text -->
-            </div>
-        </section>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>Developed for AI Procurement Hackathon 2026</p>
-            <a href="https://github.com/neerajcoder1" target="_blank" class="github-link">
-                <i data-lucide="github"></i> neerajcoder1
+            <p>Built for AI Procurement Hackathon 2026 by <strong>Team VisionX</strong></p>
+            <a href="https://github.com/neerajcoder1/TariffWeaver-" target="_blank" class="github-link">
+                <i data-lucide="github"></i> View Project Repo
             </a>
         </div>
     </footer>
