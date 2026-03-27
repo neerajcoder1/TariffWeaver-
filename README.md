@@ -57,4 +57,13 @@ To run this project locally for testing or judge review:
 4.  **Run Analysis**: Click **Run Multi-Agent Analysis** to see the agents in action.
 
 ---
-**Built by [neerajcoder1](https://github.com/neerajcoder1) | March 2026**
+## 👥 Team VisionX
+This project was built for the **AI Procurement Hackathon 2026** by:
+
+1.  **Mohammadrafiq Amensa Nadaf** *(Team Leader)*
+2.  **Prince Dubey**
+3.  **Neeraj Gahlout** *(Developer/neerajcoder1)*
+4.  **Aryan Singh Thapa**
+
+---
+**Built by Team [VisionX](https://github.com/neerajcoder1/TariffWeaver-) | March 2026**
